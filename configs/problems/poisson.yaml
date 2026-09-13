@@ -1,0 +1,25 @@
+pde_type: poisson
+
+domain:
+  vertices:
+    - [-1.0, -1.0]
+    - [1.0, -1.0]
+    - [1.0, 1.0]
+    - [-1.0, 1.0]
+  dirichlet_points:
+    - [-9999.0, -1.0]
+  jitter_vertices: [2, 3]
+  top_corner_jitter: 0.3
+
+inclusion:
+  center: [0.0, 0.0]
+  radius: 0.25
+  center_jitter: 0.1
+  radius_relative_variation: 0.5
+
+parameters:
+  kappa_inner: 1.1
+  kappa_outer: 1.0
+  source_strength: 0.1
+  bc_scale: 1.0
+  poisson_shift: 0.0

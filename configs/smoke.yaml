@@ -1,0 +1,50 @@
+seed: 42
+
+model:
+  coord_dim: 2
+  pos_enc_dim: 8
+  hidden_channels: 16
+  num_layers: 2
+  basis_per_layer: 2
+  heads: 2
+  dropout: 0.0
+
+data:
+  pde_type: poisson
+  problem_config: problems/poisson.yaml
+  mesh_size: 64
+  train_samples: 4
+  test_samples: 2
+  randomize_geometry: true
+  randomize_params: true
+  param_variation: 0.1
+  use_preconditioner: false
+
+training:
+  batch_size: 2
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  gradient_clip: 1.0
+  save_interval: 1
+  max_basis_size: 8
+  orthogonalization: incremental
+  stages:
+    - steps: 1
+      epochs: 1
+
+solver:
+  max_iterations: 2
+  max_basis_size: 8
+  absolute_tolerance: 0.00001
+  min_reduction: 0.0
+  min_reduction_patience: 2
+  orthogonalization: incremental
+
+evaluation:
+  batch_size: 2
+  warmup_iterations: 0
+  compare_gmres: false
+  compare_fgmres: false
+  compare_minres: false
+  krylov_restart: 20
+  krylov_max_iterations: 100

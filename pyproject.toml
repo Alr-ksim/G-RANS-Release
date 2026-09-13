@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grans"
+version = "0.1.0"
+description = "Generalizable Residual-Aware Neural Solvers for sparse PDE systems"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "G-RANS authors"}]
+dependencies = [
+  "torch>=2.2",
+  "torch-geometric>=2.5",
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "meshpy>=2022.1",
+  "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.9"]
+
+[project.scripts]
+grans-generate = "grans.cli.generate:main"
+grans-train = "grans.cli.train:main"
+grans-evaluate = "grans.cli.evaluate:main"
+grans-summarize = "grans.cli.summarize:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
