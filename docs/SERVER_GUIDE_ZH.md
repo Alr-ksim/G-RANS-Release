@@ -137,20 +137,3 @@ df -i /path/to/output
 du -sh /path/to/output
 quota -s 2>/dev/null || true
 ```
-
-## 6. 开发和扩展
-
-修改代码后先运行：
-
-```bash
-python -m compileall -q src tests
-pytest
-ruff check .
-```
-
-新增 PDE 时通常需要更新问题 YAML、配置校验、FEM 组装分支和测试；新增实验规模可复制并修改
-`configs/paper/` 中的 YAML。需要插入自定义预处理或后处理时，可复制
-`scripts/run_pipeline_step_by_step.sh`，保持数据生成、训练、评估三个阶段的输入输出约定。
-
-默认 `orthogonalization: incremental`：新候选块先投影到已有基的正交补，再对新块执行 QR；
-将训练或求解配置改为 `full` 可进行完整累计 QR 的数值对照。

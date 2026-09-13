@@ -6,6 +6,7 @@ Solvers for Sparse Systems** (ICML 2026). It solves sparse linear systems from
 subspace corrections.
 
 Openreview: https://openreview.net/forum?id=uizi6lvkSW
+
 ICML Poster: https://icml.cc/virtual/2026/poster/60991
 
 ## Installation
@@ -78,9 +79,7 @@ grans-evaluate --config configs/smoke.yaml \
 
 Use `--device cuda:0` for a visible GPU. `grans-evaluate` writes both the full
 per-sample `evaluation.json` and the aggregate-only
-`evaluation_summary.json`. The summary reports means for all core metrics and
-standard deviations only for iteration counts, relative errors, timings, and
-per-sample speedups.
+`evaluation_summary.json`.
 
 If a full report already exists, regenerate only its compact view:
 
@@ -111,9 +110,7 @@ artifacts/poisson_n1000/
 ```
 
 The eight paper configurations cover the four PDE families at target sizes
-1000 and 2000. Compare regenerated configuration hashes and artifact hashes
-with the exact data/checkpoints used for publication before making numerical
-reproduction claims.
+1000 and 2000. 
 
 ## Checkpoints and resume
 
@@ -139,9 +136,7 @@ grans-train --config configs/paper/poisson_n1000.yaml \
 
 The saved state includes model, optimizer, scheduler, completed epoch, best
 loss, and random-number generators. A run-directory lock prevents concurrent
-writers. Atomic replacement protects the previous checkpoint from interrupted
-writes; it cannot fix an exhausted disk, quota, inode limit, or unhealthy
-network filesystem.
+writers.
 
 ## Source layout
 
@@ -155,11 +150,6 @@ configs/              smoke, paper, and PDE problem configurations
 scripts/              one-command and step-by-step workflows
 tests/                unit and integration-oriented tests
 ```
-
-Training and inference share `solvers/projection.py`. The default
-`orthogonalization: incremental` projects each new candidate block against the
-retained basis and QR-factorizes only that block; `full` remains available as a
-reference path. Public dataset and checkpoint formats are versioned.
 
 For the Chinese server guide, see
 [`docs/SERVER_GUIDE_ZH.md`](docs/SERVER_GUIDE_ZH.md).
