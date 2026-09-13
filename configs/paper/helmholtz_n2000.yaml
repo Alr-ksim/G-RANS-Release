@@ -6,7 +6,7 @@ model:
   hidden_channels: 64
   num_layers: 4
   basis_per_layer: 5
-  heads: 8
+  heads: 4
   dropout: 0.1
 
 data:
